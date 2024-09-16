@@ -1,0 +1,102 @@
+# Data storage for products (in-memory)
+products = []
+
+# Function to add a product
+def add_product(name, category, price, quantity):
+    product = {
+        "id": len(products) + 1,
+        "name": name,
+        "category": category,
+        "price": price,
+        "quantity": quantity
+    }
+    products.append(product)
+    print(f"Product '{name}' added successfully.")
+
+# Function to edit a product
+def edit_product(product_id, name, category, price, quantity):
+    for product in products:
+        if product["id"] == product_id:
+            product["name"] = name
+            product["category"] = category
+            product["price"] = price
+            product["quantity"] = quantity
+            print(f"Product ID {product_id} updated successfully.")
+            return
+    print(f"Product ID {product_id} not found.")
+
+# Function to delete a product
+def delete_product(product_id):
+    global products
+    products = [product for product in products if product["id"] != product_id]
+    print(f"Product ID {product_id} deleted successfully.")
+
+# Function to display low-stock alerts
+def low_stock_alert(threshold):
+    low_stock_items = [product for product in products if product["quantity"] < threshold]
+    if low_stock_items:
+        print("Low-stock products:")
+        for product in low_stock_items:
+            print(f"{product['name']} (ID: {product['id']}) - Quantity: {product['quantity']}")
+    else:
+        print("No low-stock products.")
+
+# Function to display the inventory
+def display_inventory():
+    if not products:
+        print("No products in inventory.")
+    else:
+        print("Inventory:")
+        for product in products:
+            print(f"ID: {product['id']}, Name: {product['name']}, Category: {product['category']}, Price: {product['price']}, Quantity: {product['quantity']}")
+
+# Main program loop
+def main():
+    while True:
+        print("\nInventory Management System")
+        print("1. Add Product")
+        print("2. Edit Product")
+        print("3. Delete Product")
+        print("4. View Inventory")
+        print("5. Low Stock Alert")
+        print("6. Exit")
+
+        choice = input("Enter your choice (1-6): ")
+
+        if choice == '1':
+            name = input("Enter product name: ")
+            category = input("Enter product category: ")
+            price = float(input("Enter product price: "))
+            quantity = int(input("Enter product quantity: "))
+            add_product(name, category, price, quantity)
+
+        elif choice == '2':
+            product_id = int(input("Enter product ID to edit: "))
+            name = input("Enter new product name: ")
+            category = input("Enter new product category: ")
+            price = float(input("Enter new product price: "))
+            quantity = int(input("Enter new product quantity: "))
+            edit_product(product_id, name, category, price, quantity)
+
+        elif choice == '3':
+            product_id = int(input("Enter product ID to delete: "))
+            delete_product(product_id)
+
+        elif choice == '4':
+            display_inventory()
+
+        elif choice == '5':
+            threshold = int(input("Enter low-stock threshold: "))
+            low_stock_alert(threshold)
+
+        elif choice == '6':
+            print("Exiting the program.")
+            break
+
+        else:
+            print("Invalid choice. Please select a valid option.")
+
+# Run the program
+if __name__ == "__main__":
+    main()
+
