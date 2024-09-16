@@ -8,6 +8,8 @@ Domine:PYTHON PROGRAMMING
 
 Duration:AUGUST TO SEPTEMBER 2024
 
+![_IDLE Shell 3 12 4_ 16-Sep-24 8_15_34 AM](https://github.com/user-attachments/assets/4e70f76f-47c6-47e4-a989-2598c01f7896)
+
 
 OVERVIEW OF PROJECT
 
